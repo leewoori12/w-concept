@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, initial-scale=1.0" />
+  <title>W CONCEPT - Your concept. Our curation.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* 기본 리셋 및 1920px 캔버스 기준 세팅 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #111111;
+      background-color: #ffffff;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul, li {
+      list-style: none;
+    }
+
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 1920px 전체 래퍼 및 1440px 메인 그리드 컨테이너 */
+    .page-wrapper {
+      width: 1920px;
+      min-height: 3000px;
+      margin: 0 auto;
+      background: #ffffff;
+    }
+
+    .container {
+      width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* 상단 띠 배너 */
+    .top-promo-bar {
+      width: 100%;
+      height: 32px;
+      background-color: #e62e2d;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    /* 헤더 */
+    .site-header {
+      background-color: #111111;
+      color: #ffffff;
+    }
+
+    .header-utility {
+      border-bottom: 1px solid #222222;
+      height: 32px;
+      display: flex;
+      align-items: center;
+    }
+
+    .utility-links {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+      font-size: 11px;
+      color: #aaaaaa;
+    }
+
+    .utility-links a:hover {
+      color: #ffffff;
+    }
+
+    .header-main {
+      height: 76px;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-main-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+    }
+
+    .search-box {
+      width: 520px;
+      height: 38px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      margin-right: auto;
+      margin-left: 48px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 13px;
+      color: #111111;
+    }
+
+    .search-box input::placeholder {
+      color: #999999;
+    }
+
+    .search-box button {
+      color: #111111;
+      display: flex;
+      align-items: center;
+    }
+
+    .user-actions {
+      display: flex;
+      gap: 28px;
+    }
+
+    .action-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #dddddd;
+    }
+
+    .action-item:hover {
+      color: #ffffff;
+    }
+
+    /* 1차 GNB */
+    .gnb-primary {
+      border-top: 1px solid #262626;
+      height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .gnb-list {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .gnb-list a {
+      color: #cccccc;
+      transition: color 0.2s;
+    }
+
+    .gnb-list a:hover,
+    .gnb-list a.active {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .gnb-list .divider {
+      color: #333333;
+      font-size: 12px;
+    }
+
+    .gnb-list a.highlight-red {
+      color: #ff4d4f;
+    }
+
+    /* 2차 서브 GNB */
+    .gnb-secondary {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e5e5e5;
+      height: 42px;
+      display: flex;
+      align-items: center;
+    }
+
+    .sub-list {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 13px;
+      color: #555555;
+    }
+
+    .sub-list a.active,
+    .sub-list a:hover {
+      color: #111111;
+      font-weight: 700;
+    }
+
+    /* 1. 히어로 배너 섹션 */
+    .hero-section {
+      background-color: #f6f5f2;
+      position: relative;
+    }
+
+    .hero-container {
+      display: flex;
+      height: 460px;
+    }
+
+    .hero-text-box {
+      width: 480px;
+      padding: 54px 40px 40px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #888888;
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: #111111;
+      margin-bottom: 18px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 10px;
+    }
+
+    .hero-desc {
+      font-size: 13px;
+      color: #666666;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .btn-black {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: fit-content;
+      gap: 16px;
+      background-color: #111111;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 20px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-black:hover {
+      background-color: #333333;
+    }
+
+    .hero-image-box {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-curated {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(17, 17, 17, 0.85);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 5px 10px;
+      letter-spacing: 0.06em;
+    }
+
+    .img-caption {
+      position: absolute;
+      bottom: 18px;
+      left: 24px;
+      color: rgba(255, 255, 255, 0.85);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-controls {
+      background-color: #ffffff;
+      border-bottom: 1px solid #eeeeee;
+      height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-controls-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .slide-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #888888;
+    }
+
+    .slide-indicator .current-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #111111;
+    }
+
+    .slide-label {
+      margin-left: 16px;
+      color: #555555;
+    }
+
+    .slide-buttons {
+      display: flex;
+      gap: 14px;
+      color: #333333;
+    }
+
+    .slide-buttons button:hover {
+      color: #000000;
+    }
+
+    /* 공통 섹션 헤더 */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #111111;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: #777777;
+      margin-top: 4px;
+    }
+
+    .section-sub-right,
+    .more-link {
+      font-size: 12px;
+      color: #666666;
+    }
+
+    .more-link:hover {
+      color: #111111;
+    }
+
+    /* 2. Find your next. (카테고리 그리드) */
+    .section-category {
+      padding: 44px 0 36px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    .category-card {
+      display: block;
+    }
+
+    .cat-img {
+      height: 112px;
+      overflow: hidden;
+      background-color: #f4f4f4;
+      margin-bottom: 8px;
+    }
+
+    .cat-img img {
+      transition: transform 0.35s ease;
+    }
+
+    .category-card:hover .cat-img img {
+      transform: scale(1.05);
+    }
+
+    .cat-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #222222;
+    }
+
+    /* 3. Just landed. & 6. The most wanted. 공통 상품 그리드 */
+    .section-just-landed,
+    .section-most-wanted {
+      padding: 36px 0 56px;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .pill {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      border: 1px solid #dddddd;
+      color: #555555;
+      background-color: #ffffff;
+      transition: all 0.2s;
+    }
+
+    .pill:hover {
+      border-color: #111111;
+    }
+
+    .pill.active {
+      background-color: #111111;
+      border-color: #111111;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .product-grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .prod-thumb {
+      position: relative;
+      height: 290px;
+      background-color: #a3a3a3;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .prod-thumb img {
+      transform: scale(1.16); /* 여백이 안 보일 때까지 1.12 ~ 1.2 사이로 조절 */
+      transition: transform 0.35s ease;
+    }
+
+    .product-card:hover .prod-thumb img {
+      transform: scale(1.2);
+    }
+
+    .rank-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      background-color: #111111;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .wish-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 28px;
+      height: 28px;
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 50%;
+      font-size: 15px;
+      color: #333333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .wish-btn.liked {
+      color: #e62e2d;
+    }
+
+    .prod-badge {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #666666;
+      background-color: #f2f2f2;
+      padding: 2px 6px;
+      margin-bottom: 6px;
+    }
+
+    .prod-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 3px;
+    }
+
+    .prod-name {
+      font-size: 12px;
+      color: #666666;
+      margin-bottom: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .prod-price {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .prod-price .discount {
+      color: #e62e2d;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .prod-price .price {
+      color: #111111;
+    }
+
+    /* 4. Less rules. More you. (다크 에디토리얼 섹션) */
+    .section-dark-editorial {
+      background-color: #141414;
+      color: #ffffff;
+      padding: 56px 0 64px;
+    }
+
+    .dark-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: #888888;
+      margin-bottom: 6px;
+    }
+
+    .dark-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .dark-right-note {
+      font-size: 12px;
+      color: #999999;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    .editorial-two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .ed-img {
+      height: 220px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .ed-img img {
+      transition: transform 0.4s ease;
+    }
+
+    .editorial-card:hover .ed-img img {
+      transform: scale(1.04);
+    }
+
+    .ed-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ed-caption h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .ed-caption p {
+      font-size: 13px;
+      color: #999999;
+    }
+
+    .ed-arrow {
+      font-size: 20px;
+      color: #cccccc;
+    }
+
+    /* 5. Meet the designer. */
+    .section-designer {
+      padding: 56px 0 40px;
+    }
+
+    .designer-feature-box {
+      display: flex;
+      background-color: #f7f6f3;
+      height: 280px;
+      overflow: hidden;
+    }
+
+    .designer-photo {
+      width: 540px;
+      position: relative;
+    }
+
+    .photo-tag {
+      position: absolute;
+      bottom: 14px;
+      left: 16px;
+      background-color: rgba(17, 17, 17, 0.85);
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      padding: 4px 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .designer-info-panel {
+      flex: 1;
+      padding: 36px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .designer-sub-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e62e2d;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .designer-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+
+    .designer-headline {
+      font-size: 16px;
+      font-weight: 700;
+      color: #222222;
+      margin-bottom: 10px;
+    }
+
+    .designer-story {
+      font-size: 13px;
+      color: #666666;
+      max-width: 560px;
+      margin-bottom: 18px;
+    }
+
+    .designer-footnote {
+      font-size: 11px;
+      color: #888888;
+      margin-top: 10px;
+    }
+
+    .designer-index-bar {
+      margin-top: 20px;
+      padding: 14px 20px;
+      border-top: 1px solid #eeeeee;
+      border-bottom: 1px solid #eeeeee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .index-title {
+      color: #888888;
+    }
+
+    .designer-links {
+      display: flex;
+      gap: 80px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+
+    .designer-links a {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    /* 7. ONLY AT W. (레드 배너) */
+    .section-only-at-w {
+      background-color: #e62e2d;
+      color: #ffffff;
+      height: 220px;
+      display: flex;
+      align-items: center;
+    }
+
+    .only-w-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .only-w-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 46px;
+      font-weight: 800;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .only-w-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+    }
+
+    .only-w-center h4 {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .only-w-center p {
+      font-size: 12px;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background-color: #ffffff;
+      color: #111111;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 18px;
+    }
+
+    .only-w-right {
+      width: 440px;
+      height: 100%;
+      position: relative;
+    }
+
+    .only-w-caption {
+      position: absolute;
+      bottom: 10px;
+      left: -170px;
+      font-size: 11px;
+      opacity: 0.85;
+    }
+
+    /* 8. Beyond the wardrobe. (매거진 & 혜택 바) */
+    .section-magazine {
+      padding: 56px 0 48px;
+    }
+
+    .magazine-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .mag-img {
+      height: 190px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .mag-img img {
+      transition: transform 0.35s ease;
+    }
+
+    .mag-card:hover .mag-img img {
+      transform: scale(1.04);
+    }
+
+    .mag-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .mag-text h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .mag-text p {
+      font-size: 12px;
+      color: #777777;
+    }
+
+    .mag-arrow {
+      font-size: 18px;
+      color: #555555;
+    }
+
+    /* 3단 혜택 스트립 */
+    .benefit-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid #e5e5e5;
+      background-color: #fafafa;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      padding: 20px 28px;
+      border-right: 1px solid #e5e5e5;
+    }
+
+    .benefit-item:last-child {
+      border-right: none;
+    }
+
+    .benefit-icon {
+      font-size: 22px;
+      margin-right: 16px;
+    }
+
+    .benefit-text {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .benefit-text strong {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .benefit-text span {
+      font-size: 12px;
+      color: #777777;
+    }
+
+    .benefit-arrow {
+      font-size: 14px;
+      color: #888888;
+    }
+
+    /* 9. 푸터 */
+    .site-footer {
+      background-color: #161616;
+      color: #999999;
+      padding-top: 56px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .footer-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .footer-slogan {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: #cccccc;
+      margin-bottom: 14px;
+    }
+
+    .footer-desc {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #777777;
+    }
+
+    .footer-col h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+
+    .footer-col ul li a:hover {
+      color: #ffffff;
+    }
+
+    .cs-headline {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .cs-hours {
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-icons a {
+      width: 28px;
+      height: 28px;
+      border: 1px solid #444444;
+      border-radius: 50%;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-bottom {
+      padding: 24px 0 36px;
+      font-size: 11px;
+      color: #666666;
+    }
+
+    .footer-bottom-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .legal-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .legal-links strong {
+      color: #bbbbbb;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- 최상단 띠 배너 -->
+    <div class="top-promo-bar">
+      <span>신규 가입 시 즉시 사용 가능한 15% 할인 쿠폰팩 지급</span>
+      <span class="arrow-down"></span>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="site-header">
+      <div class="header-utility">
+        <div class="container">
+          <ul class="utility-links">
+            <li><a href="#">로그인</a></li>
+            <li><a href="#">회원가입</a></li>
+            <li><a href="#">고객센터</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="header-main">
+        <div class="container header-main-inner">
+          <h1 class="logo"><a href="#">W CONCEPT</a></h1>
+          
+          <div class="search-box">
+            <input type="text" placeholder="브랜드 또는 상품명, 스타일을 검색해 보세요" />
+            <button type="button" aria-label="검색">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+
+          <div class="user-actions">
+            <a href="#" class="action-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>마이페이지</span>
+            </a>
+            <a href="#" class="action-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+              <span>찜한상품</span>
+            </a>
+            <a href="#" class="action-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>쇼핑백</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GNB (1차 카테고리) -->
+      <nav class="gnb-primary">
+        <div class="container">
+          <ul class="gnb-list">
+            <li><a href="#">홈</a></li>
+            <li><a href="#">베스트</a></li>
+            <li><a href="#" class="active">우먼</a></li>
+            <li><a href="#">맨</a></li>
+            <li><a href="#">액세서리</a></li>
+            <li><a href="#">라이프</a></li>
+            <li><a href="#">뷰티</a></li>
+            <li><a href="#">키즈</a></li>
+            <li class="divider">|</li>
+            <li><a href="#">단독</a></li>
+            <li><a href="#" class="highlight-red">세일</a></li>
+            <li><a href="#">신상</a></li>
+            <li><a href="#">쿠폰</a></li>
+            <li><a href="#">발견</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- 2차 서브 카테고리 -->
+      <div class="gnb-secondary">
+        <div class="container">
+          <ul class="sub-list">
+            <li><a href="#" class="active">전체 카테고리</a></li>
+            <li><a href="#">아우터</a></li>
+            <li><a href="#">재킷/코트</a></li>
+            <li><a href="#">니트</a></li>
+            <li><a href="#">셔츠/블라우스</a></li>
+            <li><a href="#">티셔츠</a></li>
+            <li><a href="#">원피스</a></li>
+            <li><a href="#">스커트</a></li>
+            <li><a href="#">팬츠</a></li>
+            <li><a href="#">데님</a></li>
+            <li><a href="#">액티브웨어</a></li>
+            <li><a href="#">가방</a></li>
+            <li><a href="#">슈즈</a></li>
+            <li><a href="#">주얼리</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. 히어로 배너 섹션 -->
+    <section class="hero-section">
+      <div class="hero-slide active">
+        <div class="container hero-container">
+          <div class="hero-text-box">
+            <span class="hero-tag">THE NEW SEASON | VOL.01</span>
+            <h2 class="hero-title">A NEW<br>POINT<br>OF VIEW.</h2>
+            <p class="hero-subtitle">익숙한 일상, 낯선 시선.</p>
+            <p class="hero-desc">가장 간결한 실루엣과 깊이 있는 가을의 질감.<br>지금, 당신의 새로운 취향을 발견하세요.</p>
+            <a href="#" class="btn-black">가을 아우터 쇼핑하기 <span>&gt;</span></a>
+          </div>
+          <div class="hero-image-box">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1350&q=80" alt="가을 아우터 룩북" />
+            <span class="badge-curated">W CURATED</span>
+            <span class="img-caption">AUTUMN / WINTER COLLECTION</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 히어로 컨트롤 바 -->
+      <div class="hero-controls">
+        <div class="container hero-controls-inner">
+          <div class="slide-indicator">
+            <span class="current-num">01</span> / <span class="total-num">04</span>
+            <span class="slide-label">가을을 여는 감각적인 아우터</span>
+          </div>
+          <div class="slide-buttons">
+            <button type="button" id="prevSlide" aria-label="이전">&larr;</button>
+            <button type="button" id="pauseSlide" aria-label="일시정지">&#10074;&#10074;</button>
+            <button type="button" id="nextSlide" aria-label="다음">&rarr;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Find your next. (카테고리 그리드) -->
+    <section class="section-category">
+      <div class="container">
+        <div class="section-header">
+          <h3 class="section-title">Find your next.</h3>
+          <span class="section-sub-right">지금 가장 주목받는 카테고리</span>
+        </div>
+        <div class="category-grid">
+          <a href="#" class="category-card">
+            <div class="cat-img"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=400&q=80" alt="아우터"></div>
+            <span class="cat-name">아우터</span>
+          </a>
+          <a href="#" class="category-card">
+            <div class="cat-img"><img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=400&q=80" alt="니트"></div>
+            <span class="cat-name">니트</span>
+          </a>
+          <a href="#" class="category-card">
+            <div class="cat-img"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80" alt="원피스"></div>
+            <span class="cat-name">원피스</span>
+          </a>
+          <a href="#" class="category-card">
+            <div class="cat-img"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80" alt="가방"></div>
+            <span class="cat-name">가방</span>
+          </a>
+          <a href="#" class="category-card">
+            <div class="cat-img"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" alt="슈즈"></div>
+            <span class="cat-name">슈즈</span>
+          </a>
+          <a href="#" class="category-card">
+            <div class="cat-img"><img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=400&q=80" alt="주얼리"></div>
+            <span class="cat-name">주얼리</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Just landed. (신상품 섹션) -->
+    <section class="section-just-landed">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h3 class="section-title">Just landed.</h3>
+            <p class="section-desc">오늘의 신상, 가장 먼저 만나는 디자이너 컬렉션</p>
+          </div>
+          <a href="#" class="more-link">신상품 전체 보기 &rarr;</a>
+        </div>
+
+        <div class="filter-pills" data-target="just-landed">
+          <button class="pill active">전체</button>
+          <button class="pill">아우터/재킷</button>
+          <button class="pill">니트</button>
+          <button class="pill">가방</button>
+          <button class="pill">슈즈</button>
+          <button class="pill">액세서리</button>
+        </div>
+
+        <div class="product-grid-5">
+          <!-- 상품 1 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <img src="images/w1.png" alt="LOW CLASSIC" style="object-fit: contain; width: 100%;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">NEW</span>
+              <h4 class="prod-brand">LOW CLASSIC</h4>
+              <p class="prod-name">울 블렌드 오버사이즈 재킷 - 브라운</p>
+              <div class="prod-price">
+                <span class="discount">15%</span>
+                <span class="price">278,100원</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 상품 2 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <img src="images/w2.png" alt="GROVE" style="object-fit: contain;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">W EXCLUSIVE</span>
+              <h4 class="prod-brand">GROVE</h4>
+              <p class="prod-name">소프트 케이블 라운드 니트 - 크림</p>
+              <div class="prod-price">
+                <span class="discount">10%</span>
+                <span class="price">187,100원</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 상품 3 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <img src="images/w3.png" alt="MARGE SHERWOOD" style="object-fit: contain;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">NEW COLOR</span>
+              <h4 class="prod-brand">MARGE SHERWOOD</h4>
+              <p class="prod-name">소프트 보스턴 백 - 버건디</p>
+              <div class="prod-price">
+                <span class="discount">20%</span>
+                <span class="price">228,800원</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 상품 4 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <img src="images/w4.png" alt="AMOMENTO" style="object-fit: contain;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">NEW</span>
+              <h4 class="prod-brand">AMOMENTO</h4>
+              <p class="prod-name">커브드 와이드 데님 - 인디고</p>
+              <div class="prod-price">
+                <span class="discount">10%</span>
+                <span class="price">170,100원</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 상품 5 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <img src="images/w5.png" alt="SAPPUN" style="object-fit: contain;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">BEST</span>
+              <h4 class="prod-brand">SAPPUN</h4>
+              <p class="prod-name">클래식 페니 로퍼 3cm - 블랙</p>
+              <div class="prod-price">
+                <span class="discount">25%</span>
+                <span class="price">79,200원</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Less rules. More you. (다크 에디토리얼 섹션) -->
+    <section class="section-dark-editorial">
+      <div class="container">
+        <div class="dark-header">
+          <div>
+            <span class="eyebrow">THE STYLE EDIT | AUTUMN 2026</span>
+            <h3 class="dark-title">Less rules. More you.</h3>
+          </div>
+          <p class="dark-right-note">정해진 공식보다 나만의 밸런스,<br>이번 가을 스타일링의 두 가지 키워드.</p>
+        </div>
+
+        <div class="editorial-two-col">
+          <a href="#" class="editorial-card">
+            <div class="ed-img">
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80" alt="테일러링의 새로운 태도">
+            </div>
+            <div class="ed-caption">
+              <div>
+                <h4>테일러링의 새로운 태도</h4>
+                <p>구조적인 라인과 부드러운 텍스처의 감각적 균형</p>
+              </div>
+              <span class="ed-arrow">&#8599;</span>
+            </div>
+          </a>
+
+          <a href="#" class="editorial-card">
+            <div class="ed-img">
+              <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=900&q=80" alt="버건디 한 끗">
+            </div>
+            <div class="ed-caption">
+              <div>
+                <h4>버건디 한 끗</h4>
+                <p>단조로운 룩에 깊이를 더하는 가장 선명한 포인트</p>
+              </div>
+              <span class="ed-arrow">&#8599;</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Meet the designer. (디자이너 스포트라이트) -->
+    <section class="section-designer">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h3 class="section-title">Meet the designer.</h3>
+            <p class="section-desc">브랜드의 철학과 그 안에 담긴 이야기를 전합니다</p>
+          </div>
+          <a href="#" class="more-link">디자이너 더 알아보기 &rarr;</a>
+        </div>
+
+        <div class="designer-feature-box">
+          <div class="designer-photo">
+            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="RECTO">
+            <span class="photo-tag">26 FALL / WINTER COLLECTION</span>
+          </div>
+          <div class="designer-info-panel">
+            <span class="designer-sub-label">FEATURED DESIGNER • SEOUL</span>
+            <h4 class="designer-name">RECTO</h4>
+            <p class="designer-headline">경계 없는 균형, 렉토의 시선</p>
+            <p class="designer-story">
+              남성복과 여성복의 모호한 경계에서 출발한 렉토는 정제된 테일러링과 유연한 실루엣이 공존하는 독창적인 미학을 선보입니다.
+            </p>
+            <a href="#" class="btn-black">렉토 컬렉션 바로가기 <span>&#8599;</span></a>
+            <span class="designer-footnote">* 전 품목 최대 15% 단독 쿠폰 혜택 제공</span>
+          </div>
+        </div>
+
+        <div class="designer-index-bar">
+          <span class="index-title">이달의 주목할 디자이너</span>
+          <div class="designer-links">
+            <a href="#">LOW CLASSIC <span>&#8964;</span></a>
+            <a href="#">AMOMENTO <span>&#8964;</span></a>
+            <a href="#">ORR <span>&#8964;</span></a>
+            <a href="#">MARGE SHERWOOD <span>&#8964;</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. The most wanted. (베스트 랭킹 01~05) -->
+    <section class="section-most-wanted">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h3 class="section-title">The most wanted.</h3>
+            <p class="section-desc">지금 W컨셉에서 가장 사랑받는 아이템</p>
+          </div>
+          <a href="#" class="more-link">베스트 전체 보기 &rarr;</a>
+        </div>
+
+        <div class="filter-pills" data-target="most-wanted">
+          <button class="pill active">전체</button>
+          <button class="pill">의류</button>
+          <button class="pill">가방</button>
+          <button class="pill">슈즈</button>
+          <button class="pill">액세서리</button>
+        </div>
+
+        <div class="product-grid-5">
+          <!-- 01 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <span class="rank-badge">01</span>
+              <img src="images/w6.png" alt="FRONTROW" style="object-fit: contain;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">W EXCLUSIVE</span>
+              <h4 class="prod-brand">FRONTROW</h4>
+              <p class="prod-name">캐시미어 블렌드 벨티드 코트 - 카멜</p>
+              <div class="prod-price">
+                <span class="discount">30%</span>
+                <span class="price">389,500원</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <span class="rank-badge">02</span>
+              <img src="images/w7.png" alt="MARGE SHERWOOD" style="object-fit: contain;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">BEST</span>
+              <h4 class="prod-brand">MARGE SHERWOOD</h4>
+              <p class="prod-name">아웃포켓 숄더백 - 다크 브라운</p>
+              <div class="prod-price">
+                <span class="discount">15%</span>
+                <span class="price">195,000원</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <span class="rank-badge">03</span>
+              <img src="images/w8.png" alt="GROVE" style="object-fit: contain;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">NEW</span>
+              <h4 class="prod-brand">GROVE</h4>
+              <p class="prod-name">울 캐시미어 가디건 - 그레이</p>
+              <div class="prod-price">
+                <span class="discount">15%</span>
+                <span class="price">125,100원</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <span class="rank-badge">04</span>
+              <img src="images/w9.png" alt="DUNST" style="object-fit: contain;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">BEST</span>
+              <h4 class="prod-brand">DUNST</h4>
+              <p class="prod-name">유니섹스 스웨이드 숏 재킷 - 카키</p>
+              <div class="prod-price">
+                <span class="discount">15%</span>
+                <span class="price">226,100원</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 05 -->
+          <article class="product-card">
+            <div class="prod-thumb">
+              <span class="rank-badge">05</span>
+              <img src="images/w10.png" alt="OUVRIR" style="object-fit: contain;">
+              <button class="wish-btn" aria-label="찜하기">♡</button>
+            </div>
+            <div class="prod-info">
+              <span class="prod-badge">BEST</span>
+              <h4 class="prod-brand">OUVRIR</h4>
+              <p class="prod-name">스퀘어 토 로퍼 - 블랙</p>
+              <div class="prod-price">
+                <span class="discount">20%</span>
+                <span class="price">134,400원</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ONLY AT W. (레드 풀와이드 배너) -->
+    <section class="section-only-at-w">
+      <div class="container only-w-inner">
+        <div class="only-w-left">
+          <h3 class="only-w-logo">ONLY<br>AT W.</h3>
+          <span class="only-w-sub">EXCLUSIVE FINDS, JUST FOR YOU.</span>
+        </div>
+
+        <div class="only-w-center">
+          <h4>취향도, 혜택도 남다르게.<br>가을 단독 컬렉션</h4>
+          <p>오직 W컨셉에서만 만나는 단독 라인업 &amp; 최대 30% 쿠폰</p>
+          <a href="#" class="btn-white">단독 혜택 확인하기 <span>&gt;</span></a>
+        </div>
+
+        <div class="only-w-right">
+          <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=700&q=80" alt="가을 단독 컬렉션 백">
+          <span class="only-w-caption">* 기간 한정 단독 특가 및 사은품 증정</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Beyond the wardrobe. (매거진 & 혜택 바) -->
+    <section class="section-magazine">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h3 class="section-title">Beyond the wardrobe.</h3>
+            <p class="section-desc">옷장 너머, 취향을 넓히는 W의 이야기</p>
+          </div>
+          <a href="#" class="more-link">매거진 전체 보기 &rarr;</a>
+        </div>
+
+        <div class="magazine-grid-3">
+          <a href="#" class="mag-card">
+            <div class="mag-img">
+              <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=600&q=80" alt="니트 스타일링">
+            </div>
+            <div class="mag-text">
+              <div>
+                <h4>니트 하나로 완성하는 세 가지 가을</h4>
+                <p>STYLE GUIDE | 소재와 실루엣에 따른 다채로운 레이어링 제안</p>
+              </div>
+              <span class="mag-arrow">&#8599;</span>
+            </div>
+          </a>
+
+          <a href="#" class="mag-card">
+            <div class="mag-img">
+              <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=600&q=80" alt="디자이너 작업실">
+            </div>
+            <div class="mag-text">
+              <div>
+                <h4>좋아하는 것을 오래 만든다는 것</h4>
+                <p>INTERVIEW | 시간을 견디는 옷을 만드는 로컬 아틀리에의 기록</p>
+              </div>
+              <span class="mag-arrow">&#8599;</span>
+            </div>
+          </a>
+
+          <a href="#" class="mag-card">
+            <div class="mag-img">
+              <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80" alt="가을 데일리 백">
+            </div>
+            <div class="mag-text">
+              <div>
+                <h4>매일 들고 싶은 가방의 조건</h4>
+                <p>ITEM CURATION | 수납력과 미니멀한 무드를 모두 갖춘 가을 백</p>
+              </div>
+              <span class="mag-arrow">&#8599;</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- 하단 3단 멤버십/앱 혜택 배너 -->
+        <div class="benefit-strip">
+          <a href="#" class="benefit-item">
+            <div class="benefit-icon">🎁</div>
+            <div class="benefit-text">
+              <strong>처음이라 더 특별하게</strong>
+              <span>신규 가입 첫 구매 15% 할인 쿠폰</span>
+            </div>
+            <span class="benefit-arrow">&gt;</span>
+          </a>
+
+          <a href="#" class="benefit-item">
+            <div class="benefit-icon">💎</div>
+            <div class="benefit-text">
+              <strong>매월 찾아오는 멤버십</strong>
+              <span>등급별 전용 쿠폰팩 &amp; 적립 혜택</span>
+            </div>
+            <span class="benefit-arrow">&gt;</span>
+          </a>
+
+          <a href="#" class="benefit-item">
+            <div class="benefit-icon">📱</div>
+            <div class="benefit-text">
+              <strong>앱에서 더 가까운 W</strong>
+              <span>앱 전용 시크릿 특가 및 실시간 알림</span>
+            </div>
+            <span class="benefit-arrow">&gt;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. 푸터 -->
+    <footer class="site-footer">
+      <div class="container footer-top">
+        <div class="footer-brand">
+          <h2 class="footer-logo">W CONCEPT</h2>
+          <p class="footer-slogan">Your concept. Our curation.</p>
+          <p class="footer-desc">감각적인 디자이너 브랜드와 트렌드를 큐레이션하는<br>프리미엄 패션 &amp; 라이프스타일 플랫폼</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>HELP &amp; GUIDE</h5>
+          <ul>
+            <li><a href="#">공지사항</a></li>
+            <li><a href="#">자주 묻는 질문</a></li>
+            <li><a href="#">배송 및 반품 안내</a></li>
+            <li><a href="#">1:1 문의</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>ABOUT W</h5>
+          <ul>
+            <li><a href="#">회사 소개</a></li>
+            <li><a href="#">입점 및 제휴 안내</a></li>
+            <li><a href="#">멤버십 안내</a></li>
+            <li><a href="#">채용 정보</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-cs">
+          <h5>CUSTOMER CARE</h5>
+          <p class="cs-headline">무엇을 도와드릴까요?</p>
+          <p class="cs-hours">평일 10:00 - 17:00 (점심시간 12:00 - 13:00)<br>주말 및 공휴일 휴무</p>
+          <div class="social-icons">
+            <a href="#" aria-label="Instagram">IG</a>
+            <a href="#" aria-label="YouTube">YT</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container footer-bottom-inner">
+          <div class="legal-links">
+            <a href="#">이용약관</a>
+            <a href="#"><strong>개인정보처리방침</strong></a>
+            <a href="#">사업자정보확인</a>
+            <a href="#">청소년보호정책</a>
+          </div>
+          <p class="copyright">&copy; 2026 W CONCEPT KOREA. ALL RIGHTS RESERVED.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. 찜하기(하트) 버튼 토글
+      const wishButtons = document.querySelectorAll('.wish-btn');
+      wishButtons.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          btn.classList.toggle('liked');
+          btn.textContent = btn.classList.contains('liked') ? '♥' : '♡';
+        });
+      });
+
+      // 2. 카테고리 필터 알약 버튼 활성화 전환
+      const pillGroups = document.querySelectorAll('.filter-pills');
+      pillGroups.forEach((group) => {
+        const pills = group.querySelectorAll('.pill');
+        pills.forEach((pill) => {
+          pill.addEventListener('click', () => {
+            pills.forEach((p) => p.classList.remove('active'));
+            pill.classList.add('active');
+          });
+        });
+      });
+
+      // 3. 히어로 배너 슬라이드 데이터 및 제어
+      const slides = [
+        {
+          num: '01',
+          label: '가을을 여는 감각적인 아우터',
+          tag: 'THE NEW SEASON | VOL.01',
+          title: 'A NEW<br>POINT<br>OF VIEW.',
+          subtitle: '익숙한 일상, 낯선 시선.',
+          desc: '가장 간결한 실루엣과 깊이 있는 가을의 질감.<br>지금, 당신의 새로운 취향을 발견하세요.',
+          btnText: '가을 아우터 쇼핑하기',
+          img: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1350&q=80'
+        },
+        {
+          num: '02',
+          label: '부드러운 온기를 담은 니트 컬렉션',
+          tag: 'AUTUMN KNITWEAR | VOL.02',
+          title: 'SOFT<br>TEXTURE<br>LAYER.',
+          subtitle: '포근하게 감싸는 가을의 결.',
+          desc: '캐시미어와 울 블렌드로 완성한 에센셜 니트.<br>단독으로도, 레이어드로도 완벽한 실루엣을 만나보세요.',
+          btnText: '니트 컬렉션 보기',
+          img: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=1350&q=80'
+        },
+        {
+          num: '03',
+          label: '룩의 완성도를 높이는 레더 백',
+          tag: 'BAG CURATION | VOL.03',
+          title: 'DEEP<br>BURGUNDY<br>ACCENT.',
+          subtitle: '단조로운 일상에 더하는 선명한 포인트.',
+          desc: '차분한 가을 톤에 깊이를 더하는 버건디 & 브라운 백.<br>W컨셉 단독 컬러 라인업을 지금 확인하세요.',
+          btnText: '가방 큐레이션 보기',
+          img: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=1350&q=80'
+        },
+        {
+          num: '04',
+          label: '서울 기반 컨템포러리 디자이너 아카이브',
+          tag: 'DESIGNER ARCHIVE | VOL.04',
+          title: 'MODERN<br>TAILORING<br>EDIT.',
+          subtitle: '절제된 라인과 유려한 테일러링.',
+          desc: '매 시즌 독보적인 감도를 보여주는 디자이너 브랜드의<br>2026 F/W 키 룩을 한자리에서 만나보세요.',
+          btnText: '디자이너 룩북 보기',
+          img: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1350&q=80'
+        }
+      ];
+
+      let currentIndex = 0;
+      let isPlaying = true;
+
+      const currentNumEl = document.querySelector('.current-num');
+      const slideLabelEl = document.querySelector('.slide-label');
+      const heroTagEl = document.querySelector('.hero-tag');
+      const heroTitleEl = document.querySelector('.hero-title');
+      const heroSubtitleEl = document.querySelector('.hero-subtitle');
+      const heroDescEl = document.querySelector('.hero-desc');
+      const heroBtnEl = document.querySelector('.hero-text-box .btn-black');
+      const heroImgEl = document.querySelector('.hero-image-box img');
+
+      function renderSlide(index) {
+        const data = slides[index];
+        currentNumEl.textContent = data.num;
+        slideLabelEl.textContent = data.label;
+        heroTagEl.textContent = data.tag;
+        heroTitleEl.innerHTML = data.title;
+        heroSubtitleEl.textContent = data.subtitle;
+        heroDescEl.innerHTML = data.desc;
+        heroBtnEl.innerHTML = `${data.btnText} <span>&gt;</span>`;
+        heroImgEl.src = data.img;
+      }
+
+      document.getElementById('prevSlide').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        renderSlide(currentIndex);
+      });
+
+      document.getElementById('nextSlide').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        renderSlide(currentIndex);
+      });
+
+      let slideTimer = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        renderSlide(currentIndex);
+      }, 5000);
+
+      const pauseBtn = document.getElementById('pauseSlide');
+      pauseBtn.addEventListener('click', () => {
+        if (isPlaying) {
+          clearInterval(slideTimer);
+          pauseBtn.innerHTML = '&#9654;';
+        } else {
+          slideTimer = setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            renderSlide(currentIndex);
+          }, 5000);
+          pauseBtn.innerHTML = '&#10074;&#10074;';
+        }
+        isPlaying = !isPlaying;
+      });
+    });
+  </script>
+</body>
+</html>
